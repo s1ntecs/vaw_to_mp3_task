@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    image: vaw_to_mp3_task-api:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgresql://postgres:susel@localhost:5432/postgres
+    depends_on:
+      - database
+  database:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=susel
